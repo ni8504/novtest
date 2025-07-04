@@ -18,12 +18,11 @@
     /* ---------- BACKGROUND ---------- */
     .banner-background{
       position:absolute;inset:0;
-      background:linear-gradient(120deg,#b22234 0%,#b22234 33%,#ffffff 33%,#ffffff 66%,#3c3b6e 66%,#3c3b6e 100%); /* flag stripes */
+      background:linear-gradient(120deg,#b22234 0%,#b22234 33%,#ffffff 33%,#ffffff 66%,#3c3b6e 66%,#3c3b6e 100%);
       background-size:200% 200%;animation:wave 30s ease infinite;z-index:0;
     }
     @keyframes wave{0%{background-position:0 0}50%{background-position:100% 100%}100%{background-position:0 0}}
 
-    /* Fireworks overlay */
     .banner-background::after{
       content:"";position:absolute;inset:0;
       background:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=60');
@@ -44,17 +43,8 @@
     /* ---------- COUNTDOWN ---------- */
     #countdown{font-size:2.2em;font-weight:bold;margin-top:.6em;text-shadow:3px 3px 8px rgba(0,0,0,.8)}
 
-    /* ---------- RESPONSIVE ---------- */
-    @media(max-width:768px){
-      .main-message{font-size:2.2em}
-      .highlights{font-size:1.3em}
-      #countdown{font-size:1.8em}
-    }
-    @media(max-width:480px){
-      .main-message{font-size:1.6em}
-      .highlights{font-size:1.1em}
-      #countdown{font-size:1.5em}
-    }
+    @media(max-width:768px){.main-message{font-size:2.2em}.highlights{font-size:1.3em}#countdown{font-size:1.8em}}
+    @media(max-width:480px){.main-message{font-size:1.6em}.highlights{font-size:1.1em}#countdown{font-size:1.5em}}
   </style>
 </head>
 <body>
@@ -63,10 +53,10 @@
     <div class="sparks" aria-hidden="true"></div>
 
     <div class="banner-content">
-      <div class="main-message">July 4th Only • <strong>NO CONTRACT</strong>!</div>
+      <div class="main-message">4th of July • <strong>NO ENROLLMENT & NO CONTRACT!</strong></div>
       <div class="highlights">
         <div>🎇 One‑Day Freedom Sale</div>
-        <div>💥 Independence from contracts—today only</div>
+        <div>💥 Independence from fees <em>and</em> contracts—today only</div>
         <div>🏆 Voted Best Gym in Springfield</div>
       </div>
       <div id="countdown"></div>
@@ -75,7 +65,6 @@
 
   <!-- JS: Fireworks + Countdown -->
   <script>
-    /* Floating fireworks */
     const sparkContainer=document.querySelector('.sparks');
     const sparkCount=60;
     const icons=["🎆","🎇","✨"];
@@ -91,7 +80,6 @@
       sparkContainer.appendChild(s);
     }
 
-    /* Countdown timer to July 4, 11:59:59 PM local time */
     const targetDate=new Date('2025-07-05T00:00:00');
     const cd=document.getElementById('countdown');
     function updateCountdown(){
