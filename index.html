@@ -2,205 +2,109 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Responsive November Banner</title>
-
-  <!-- Include Google Fonts for Autumn-Themed Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@700&display=swap" rel="stylesheet">
-
+  <title>FitClub • Independence Day Freedom Banner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <style>
-    /* Reset default margins and paddings */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{width:100%;height:100%;font-family:'Montserrat',sans-serif}
+
+    /* ---------- CONTAINER ---------- */
+    .banner-container{
+      position:relative;width:100%;min-height:100vh;
+      display:flex;justify-content:center;align-items:center;text-align:center;
+      overflow:hidden;color:#ffffff;
     }
 
-    /* Remove body margins and set to fill the iframe */
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden; /* Prevent scrollbars */
+    /* ---------- BACKGROUND ---------- */
+    .banner-background{
+      position:absolute;inset:0;
+      background:linear-gradient(120deg,#b22234 0%,#b22234 33%,#ffffff 33%,#ffffff 66%,#3c3b6e 66%,#3c3b6e 100%); /* flag stripes */
+      background-size:200% 200%;animation:wave 30s ease infinite;z-index:0;
+    }
+    @keyframes wave{0%{background-position:0 0}50%{background-position:100% 100%}100%{background-position:0 0}}
+
+    /* Fireworks overlay */
+    .banner-background::after{
+      content:"";position:absolute;inset:0;
+      background:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=60');
+      background-size:cover;background-position:center;opacity:0.20;filter:blur(2px);
     }
 
-    /* Banner Container */
-    .banner-container {
-      position: relative;
-      width: 100%;
-      height: 100vh; /* Set height to viewport height */
-      overflow: hidden;
+    /* ---------- FLOATING FIREWORKS ---------- */
+    .sparks{position:absolute;inset:0;pointer-events:none;z-index:1}
+    .spark{position:absolute;top:-10%;user-select:none;animation:float linear infinite;transform-origin:center}
+    @keyframes float{0%{transform:translateY(0) rotate(0deg)}100%{transform:translateY(110vh) rotate(360deg)}}
+
+    /* ---------- CONTENT ---------- */
+    .banner-content{position:relative;z-index:2;max-width:900px;padding:20px}
+    .main-message{font-size:3em;margin-bottom:.4em;text-shadow:3px 3px 8px rgba(0,0,0,.8);padding:0 20px}
+    .highlights{font-size:1.6em;line-height:1.4;padding:0 20px;text-shadow:2px 2px 6px rgba(0,0,0,.6)}
+    .highlights div{margin-bottom:.4em}
+
+    /* ---------- COUNTDOWN ---------- */
+    #countdown{font-size:2.2em;font-weight:bold;margin-top:.6em;text-shadow:3px 3px 8px rgba(0,0,0,.8)}
+
+    /* ---------- RESPONSIVE ---------- */
+    @media(max-width:768px){
+      .main-message{font-size:2.2em}
+      .highlights{font-size:1.3em}
+      #countdown{font-size:1.8em}
     }
-
-    /* Banner Image */
-    .banner-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Ensures the image fills the container */
-      object-position: center;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0; /* Background image at the lowest layer */
-    }
-
-    /* Overlay Text with Enhanced Styling */
-    .banner-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #8B4513; /* Dark brown color */
-      text-align: center;
-      /* Warm Glow */
-      text-shadow:
-        0 0 5px #FF8C00,
-        0 0 10px #FFA500,
-        0 0 15px #FFD700;
-      padding: 8px 16px;
-      width: 90%;
-      max-width: 800px;
-      z-index: 2;
-      font-family: 'Crimson Pro', serif; /* Autumn-themed font */
-    }
-
-    .banner-text h1 {
-      font-size: 3.5em; /* Increased font size */
-      margin-bottom: 0.5em;
-    }
-
-    .banner-text p {
-      font-size: 2.5em; /* Increased font size */
-    }
-
-    /* Falling Leaves */
-    .leaf {
-      position: absolute;
-      top: -10%;
-      width: 80px;
-      opacity: 0.9;
-      z-index: 1; /* Leaves are behind the text */
-      transform-origin: center;
-    }
-
-    /* Leaf Animation */
-    @keyframes fall {
-      0% {
-        transform: translateX(0) rotate(0deg);
-        top: -10%;
-      }
-      100% {
-        transform: translateX(100px) rotate(360deg);
-        top: calc(100% - 50px); /* Stack at the bottom */
-      }
-    }
-
-    /* Responsive Adjustments */
-
-    /* Tablets and Small Desktops */
-    @media (max-width: 1024px) {
-      .banner-text h1 {
-        font-size: 3em;
-      }
-
-      .banner-text p {
-        font-size: 2em;
-      }
-    }
-
-    /* Mobile Devices */
-    @media (max-width: 768px) {
-      .banner-text h1 {
-        font-size: 2.5em;
-      }
-
-      .banner-text p {
-        font-size: 1.8em;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .banner-text h1 {
-        font-size: 2em;
-      }
-
-      .banner-text p {
-        font-size: 1.5em;
-      }
+    @media(max-width:480px){
+      .main-message{font-size:1.6em}
+      .highlights{font-size:1.1em}
+      #countdown{font-size:1.5em}
     }
   </style>
 </head>
 <body>
   <div class="banner-container">
-    <!-- Background Image -->
-    <img
-      src="https://www.fitclub.net/sites/ob-143.app.sitewright.io/files/image/2024-09/west%20weights2%20%281%29.JPG"
-      alt="November Banner"
-      class="banner-image"
-    />
-    <!-- Replace the above URL with your November background image URL -->
+    <div class="banner-background"></div>
+    <div class="sparks" aria-hidden="true"></div>
 
-    <!-- Text Overlay -->
-    <div class="banner-text">
-      <h1>🍁 Fall into Fitness this November! 🍁</h1>
-      <p>Stay active before the holidays! 🏋️‍♂️</p>
+    <div class="banner-content">
+      <div class="main-message">Independence Day • <strong>NO CONTRACT</strong>!</div>
+      <div class="highlights">
+        <div>🎇 One‑Day Freedom Sale</div>
+        <div>💥 Independence from contracts—today only</div>
+        <div>🏆 Voted Best Gym in Springfield</div>
+      </div>
+      <div id="countdown"></div>
     </div>
   </div>
 
-  <!-- JavaScript for Falling Leaves -->
+  <!-- JS: Fireworks + Countdown -->
   <script>
-    const bannerContainer = document.querySelector('.banner-container');
-
-    const leafColors = ['#FF4500', '#FF6347', '#FFA500', '#FFD700', '#FF8C00'];
-    const leafPaths = [
-      // Detailed Maple Leaf SVG path data
-      'M50,5 C30,25 10,35 10,55 C10,70 30,80 50,95 C70,80 90,70 90,55 C90,35 70,25 50,5 Z',
-      // Oak Leaf SVG path data
-      'M50,0 C35,20 15,25 15,45 C15,60 35,65 50,100 C65,65 85,60 85,45 C85,25 65,20 50,0 Z',
-      // Birch Leaf SVG path data
-      'M50,0 C70,30 70,70 50,100 C30,70 30,30 50,0 Z',
-    ];
-
-    function createLeaf() {
-      const leaf = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      leaf.setAttribute('viewBox', '0 0 100 100');
-      leaf.classList.add('leaf');
-
-      // Randomly select a leaf path and color
-      const pathData = leafPaths[Math.floor(Math.random() * leafPaths.length)];
-      const color = leafColors[Math.floor(Math.random() * leafColors.length)];
-
-      const size = 60 + Math.random() * 40; // Leaf size between 60px and 100px
-      leaf.style.width = `${size}px`;
-
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('d', pathData);
-      path.setAttribute('fill', color);
-
-      leaf.appendChild(path);
-
-      // Randomize starting position and delay
-      const leftPosition = Math.random() * 100; // Percentage
-      const animationDuration = 5 + Math.random() * 5; // 5s to 10s
-      const delay = Math.random() * 5; // 0s to 5s
-
-      leaf.style.left = `${leftPosition}%`;
-      leaf.style.animation = `fall ${animationDuration}s linear ${delay}s forwards`;
-
-      bannerContainer.appendChild(leaf);
-
-      // Remove leaf after animation completes
-      setTimeout(() => {
-        leaf.style.top = 'calc(100% - 50px)';
-        leaf.style.position = 'absolute';
-      }, (animationDuration + delay) * 1000);
+    /* Floating fireworks */
+    const sparkContainer=document.querySelector('.sparks');
+    const sparkCount=60;
+    const icons=["🎆","🎇","✨"];
+    for(let i=0;i<sparkCount;i++){
+      const s=document.createElement('div');
+      s.className='spark';
+      s.textContent=icons[Math.floor(Math.random()*icons.length)];
+      s.style.fontSize=(Math.random()*1.2+.6)+'em';
+      s.style.left=Math.random()*100+'%';
+      s.style.animationDuration=(Math.random()*9+7)+'s';
+      s.style.animationDelay=Math.random()*10+'s';
+      s.style.opacity=Math.random()*.4+.4;
+      sparkContainer.appendChild(s);
     }
 
-    // Create leaves continuously
-    setInterval(createLeaf, 1000); // Adjust the interval as needed
+    /* Countdown timer to July 4, 11:59:59 PM local time */
+    const targetDate=new Date('2025-07-05T00:00:00');
+    const cd=document.getElementById('countdown');
+    function updateCountdown(){
+      const now=new Date();
+      const diff=targetDate-now;
+      if(diff<=0){cd.textContent='Offer expired';return;}
+      const hrs=Math.floor(diff/1000/3600);
+      const mins=Math.floor((diff/1000%3600)/60);
+      const secs=Math.floor(diff/1000%60);
+      cd.textContent=`${hrs}h ${mins}m ${secs}s left`;
+    }
+    updateCountdown();
+    setInterval(updateCountdown,1000);
   </script>
 </body>
 </html>
